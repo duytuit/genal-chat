@@ -11,7 +11,7 @@ export class Group {
   @Column()
   groupName: string;
 
-  @Column({ default: '群主很懒,没写公告' })
+  @Column({ default: 'Chủ sở hữu nhóm lười biếng và không viết thông báo' })
   notice: string;
 
   @Column({type: 'double',default: new Date().valueOf()})
