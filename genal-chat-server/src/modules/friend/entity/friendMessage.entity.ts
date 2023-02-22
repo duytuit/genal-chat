@@ -11,7 +11,7 @@ export class FriendMessage {
   @Column()
   friendId: string;
 
-  @Column()
+  @Column('text')
   content: string;
 
   @Column()

@@ -7,10 +7,10 @@ export function nameVerify(name: string): boolean {
   if (name.length === 0) {
     return false;
   }
-  if (!nameReg.test(name)) {
-    return false;
-  }
-  if (name.length > 9) {
+  // if (!nameReg.test(name)) {
+  //   return false;
+  // }
+  if (name.length > 50) {
     return false;
   }
   return true;

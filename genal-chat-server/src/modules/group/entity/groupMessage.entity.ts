@@ -11,7 +11,7 @@ export class GroupMessage {
   @Column()
   groupId: string;
 
-  @Column()
+  @Column('text')
   content: string;
 
   @Column()

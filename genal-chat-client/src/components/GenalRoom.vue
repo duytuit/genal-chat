@@ -17,7 +17,7 @@
               v-text="_parseText(chat.messages[chat.messages.length - 1].content)"
               v-if="chat.messages[chat.messages.length - 1].messageType === 'text'"
             ></div>
-            <div class="image" v-if="chat.messages[chat.messages.length - 1].messageType === 'image'">[图片]</div>
+            <div class="image" v-if="chat.messages[chat.messages.length - 1].messageType === 'image'">[hình ảnh]</div>
           </div>
         </div>
       </div>
@@ -37,7 +37,7 @@
               v-text="_parseText(chat.messages[chat.messages.length - 1].content)"
               v-if="chat.messages[chat.messages.length - 1].messageType === 'text'"
             ></div>
-            <div class="image" v-if="chat.messages[chat.messages.length - 1].messageType === 'image'">[图片]</div>
+            <div class="image" v-if="chat.messages[chat.messages.length - 1].messageType === 'image'">[hình ảnh]</div>
           </div>
         </div>
       </div>

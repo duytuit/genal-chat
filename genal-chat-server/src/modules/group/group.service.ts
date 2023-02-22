@@ -26,11 +26,11 @@ export class GroupService {
           const data = await this.groupRepository.findOne({groupId: groupId});
           groupArr.push(data);
         }
-        return { msg:'获取群信息成功', data: groupArr};
+        return { msg:'Nhận thông tin nhóm thành công', data: groupArr};
       }
-      return {code: RCode.FAIL, msg:'获取群信息失败', data: null};
+      return {code: RCode.FAIL, msg:'Có được thông tin nhóm không thành công', data: null};
     } catch (e) {
-      return {code: RCode.ERROR, msg:'获取群失败',data: e};
+      return {code: RCode.ERROR, msg:'Có được thất bại nhóm',data: e};
     }
   }
 

@@ -27,7 +27,7 @@ const actions: ActionTree<ChatState, RootState> = {
     let socket: SocketIOClient.Socket = io.connect(`/?userId=${user.userId}`, { reconnection: true });
 
     socket.on('connect', async () => {
-      console.log('连接成功');
+      console.log('Kết nối thành công');
 
       // 获取聊天室所需所有信息
       socket.emit('chatData', user);
@@ -60,7 +60,7 @@ const actions: ActionTree<ChatState, RootState> = {
       let group = res.data.group;
       if (newUser.userId != user.userId) {
         commit(SET_USER_GATHER, newUser);
-        return Vue.prototype.$message.info(`${newUser.username}加入群${group.groupName}`);
+        return Vue.prototype.$message.info(`${newUser.username}Tham gia vào nhóm${group.groupName}`);
       } else {
         console.log(state.groupGather, group.groupId);
         // 是用户自己 则加入到某个群
@@ -69,7 +69,7 @@ const actions: ActionTree<ChatState, RootState> = {
           // 获取群里面所有用户的用户信息
           socket.emit('chatData', user);
         }
-        Vue.prototype.$message.info(`成功加入群${group.groupName}`);
+        Vue.prototype.$message.info(`Tham gia thành công nhóm${group.groupName}`);
         commit(SET_ACTIVE_ROOM, state.groupGather[group.groupId]);
       }
     });
@@ -99,7 +99,7 @@ const actions: ActionTree<ChatState, RootState> = {
         }
         // @ts-ignore
         window.msg = newUser.userId;
-        return Vue.prototype.$message.info(`${newUser.username}加入群${group.groupName}`);
+        return Vue.prototype.$message.info(`${newUser.username}Tham gia vào nhóm${group.groupName}`);
       } else {
         if (!state.groupGather[group.groupId]) {
           commit(SET_GROUP_GATHER, group);
@@ -139,7 +139,7 @@ const actions: ActionTree<ChatState, RootState> = {
     socket.on('joinFriendSocket', (res: ServerRes) => {
       console.log('on joinFriendSocket', res);
       if (!res.code) {
-        console.log('成功加入私聊房间');
+        console.log('Tham gia thành công phòng trò chuyện riêng');
       }
     });
 
