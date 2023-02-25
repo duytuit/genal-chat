@@ -27,11 +27,14 @@ export class AuthService {
     }
     user.password = data.password;
     const payload = {userId: user.userId, password: data.password};
+    const token =  this.jwtService.sign(payload);
+    console.log(token);
+    
     return {
       msg:'đăng nhập thành công',
       data: {
         user: user,
-        token: this.jwtService.sign(payload)
+        token: token
       },
     };
   }

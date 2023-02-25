@@ -55,6 +55,8 @@ export class UserService {
             userArr.push(data);
           }
         }
+        console.log(userIdArr);
+        
         return { msg:'Nhận thông tin người dùng thành công', data: userArr};
       }
       return {code: RCode.FAIL, msg:'Không lấy được thông tin người dùng', data: null };

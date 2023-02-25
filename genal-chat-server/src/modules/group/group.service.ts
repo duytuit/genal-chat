@@ -39,12 +39,12 @@ export class GroupService {
       let data;
       if(userId) {
         data = await this.groupUserRepository.find({userId: userId});
-        return { msg:'获取用户所有群成功', data};
+        return { msg:'Nhận được thành công của tất cả các nhóm người dùng', data};
       }
       data = await this.groupUserRepository.find();
-      return { msg:'获取系统所有群成功', data};
+      return { msg:'Nhận tất cả thành công của nhóm trong hệ thống', data};
     } catch (e) {
-      return {code: RCode.ERROR, msg:'获取用户的群失败',data: e};
+      return {code: RCode.ERROR, msg:'Nhóm không thể có được người dùng',data: e};
     }
   }
 
@@ -53,10 +53,10 @@ export class GroupService {
       let data;
       if(groupId) {
         data = await this.groupUserRepository.find({groupId: groupId});
-        return { msg:'获取群的所有用户成功', data};
+        return { msg:'Có được tất cả những người dùng thành công của nhóm', data};
       }
     } catch (e) {
-      return {code: RCode.ERROR, msg:'获取群的用户失败',data: e};
+      return {code: RCode.ERROR, msg:'Người dùng có được nhóm không thành công',data: e};
     }
   }
 
@@ -90,9 +90,9 @@ export class GroupService {
         const groups = await this.groupRepository.find({groupName: Like(`%${groupName}%`)});
         return { data: groups};
       }
-      return {code: RCode.FAIL, msg:'请输入群昵称', data: null};
+      return {code: RCode.FAIL, msg:'Vui lòng nhập biệt danh nhóm', data: null};
     } catch(e) {
-      return {code: RCode.ERROR, msg:'查找群错误', data: null};
+      return {code: RCode.ERROR, msg:'Tìm lỗi nhóm', data: null};
     }
   }
 }
