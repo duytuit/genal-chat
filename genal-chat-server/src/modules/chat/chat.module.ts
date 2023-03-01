@@ -8,6 +8,7 @@ import { UserMap } from '../friend/entity/friend.entity';
 import { FriendMessage } from '../friend/entity/friendMessage.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { ChatGPTClient } from 'src/common/tool/chatGPTClient';
 
 @Module({
   imports: [

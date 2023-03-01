@@ -38,12 +38,12 @@ const actions: ActionTree<ChatState, RootState> = {
 
     // 初始化事件监听
     socket.on('activeGroupUser', (data: any) => {
-      console.log('activeGroupUser', data);
+      //console.log('activeGroupUser', data);
       commit(SET_ACTIVE_GROUP_USER, data.data);
     });
 
     socket.on('addGroup', (res: ServerRes) => {
-      console.log('on addGroup', res);
+     // console.log('on addGroup', res);
       if (res.code) {
         return Vue.prototype.$message.error(res.msg);
       }
@@ -52,7 +52,7 @@ const actions: ActionTree<ChatState, RootState> = {
     });
 
     socket.on('joinGroup', async (res: ServerRes) => {
-      console.log('on joinGroup', res);
+     // console.log('on joinGroup', res);
       if (res.code) {
         return Vue.prototype.$message.error(res.msg);
       }
@@ -62,7 +62,7 @@ const actions: ActionTree<ChatState, RootState> = {
         commit(SET_USER_GATHER, newUser);
         return Vue.prototype.$message.info(`${newUser.username}Tham gia vào nhóm${group.groupName}`);
       } else {
-        console.log(state.groupGather, group.groupId);
+       // console.log(state.groupGather, group.groupId);
         // 是用户自己 则加入到某个群
         if (!state.groupGather[group.groupId]) {
           commit(SET_GROUP_GATHER, group);
@@ -75,7 +75,7 @@ const actions: ActionTree<ChatState, RootState> = {
     });
 
     socket.on('joinGroupSocket', (res: ServerRes) => {
-      console.log('on joinGroupSocket', res);
+      //console.log('on joinGroupSocket', res);
       if (res.code) {
         return Vue.prototype.$message.error(res.msg);
       }
@@ -109,7 +109,7 @@ const actions: ActionTree<ChatState, RootState> = {
     });
 
     socket.on('groupMessage', (res: ServerRes) => {
-      console.log('on groupMessage', res);
+      //console.log('on groupMessage', res);
       if (!res.code) {
         commit(ADD_GROUP_MESSAGE, res.data);
         let activeRoom = state.activeRoom;

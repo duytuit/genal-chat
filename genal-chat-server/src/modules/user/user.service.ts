@@ -65,6 +65,18 @@ export class UserService {
     }
   }
 
+  async postUserBot(data) {
+    try {
+      if(data) {
+        const userBot = await this.userRepository.save(data)
+        return { msg:'Nhận thông tin người dùng thành công', data: userBot};
+      }
+      return {code: RCode.FAIL, msg:'Không lấy được thông tin người dùng', data: null };
+    } catch(e) {
+      return { code: RCode.ERROR , msg:'Không lấy được thông tin người dùng', data: e };
+    }
+  }
+
   async updateUserName(user: User) {
     try {
       const oldUser = await this.userRepository.findOne({userId: user.userId, password: user.password});

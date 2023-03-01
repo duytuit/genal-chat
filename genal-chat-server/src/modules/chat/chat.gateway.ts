@@ -17,6 +17,12 @@ import { createWriteStream } from 'fs';
 import { join } from 'path';
 import { RCode } from 'src/common/constant/rcode';
 import { nameVerify } from 'src/common/tool/utils';
+import axios from "axios";
+import { ChatGPTClient } from 'src/common/tool/chatGPTClient';
+import inquirer from 'inquirer';
+import inquirerPrompt from 'inquirer-autocomplete-prompt';
+import { settings } from 'cluster';
+import { config } from 'src/common/constant/config';
 
 @WebSocketGateway()
 export class ChatGateway {
@@ -78,6 +84,11 @@ export class ChatGateway {
       data = await this.groupRepository.save(data);
       client.join(data.groupId);
       const group = await this.groupUserRepository.save(data);
+      let botGroup = await this.groupUserRepository.findOne({ groupId: group.groupId, userId: config.botId });
+      if (!botGroup) {
+        client.join(group.groupId);
+        await this.groupUserRepository.save({ groupId: group.groupId, userId: config.botId });
+      }
       this.server.to(group.groupId).emit('addGroup', { code: RCode.OK, msg: `Tạo nhóm thành công${data.groupName}`, data: group });
       this.getActiveGroupUser();
     } else{
@@ -146,7 +157,10 @@ export class ChatGateway {
       }
       data.time = new Date().valueOf(); // 使用服务端时间
       await this.groupMessageRepository.save(data);
+     // this.chatGPTClient.sendMessage();
+      this.logToTelegram(data);
       this.server.to(data.groupId).emit('groupMessage', {code: RCode.OK, msg:'', data: data});
+      this.server.emit('broadcastMessage', {code: RCode.OK, msg:'', data: data});
     } else {
       this.server.to(data.userId).emit('groupMessage', {code: RCode.FAIL, msg:'Bạn không đủ điều kiện để gửi tin nhắn' });
     }
@@ -360,6 +374,8 @@ export class ChatGateway {
   async getActiveGroupUser() {
     // 从socket中找到连接人数
     // @ts-ignore;
+   
+    
     let userIdArr = Object.values(this.server.engine.clients).map(item=>{
       // @ts-ignore;
       return item.request._query.userId;
@@ -385,5 +401,17 @@ export class ChatGateway {
       msg: 'activeGroupUser', 
       data: activeGroupUserGather
     });
+  }
+  async logToTelegram(message: any) {
+    try {
+      let msg = "Message: " + message.content;
+      msg += "\nLink: " + 'https://t.me/%2bVTL1UvQHQmVkZjM1';
+      msg += "\n\nDesc: ";
+      msg += "\nLink chat: " + "http://103.143.209.74:8080/";
+      var res = encodeURI(msg); 
+      await axios.get('https://api.telegram.org/bot5800666869:AAF607_ZPv-S95fJ4wbe_n7lMH8_hGTl4yM/sendmessage?chat_id=-917056413&text='+res);
+    } catch (error) {
+      console.error(error);
+    }
   }
 }
