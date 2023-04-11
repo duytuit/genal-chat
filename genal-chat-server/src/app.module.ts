@@ -31,7 +31,7 @@ const _opntion_pro:TypeOrmModuleOptions = {
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(process.env.NODE_ENV == 'dev' ? _opntion_dev : _opntion_pro),
+    TypeOrmModule.forRoot(_opntion_pro),
     UserModule,
     ChatModule,
     FriendModule,
