@@ -21,8 +21,8 @@ import { TestModule } from './modules/test/test.module';
 const _opntion_pro:TypeOrmModuleOptions = {
   type: 'mysql',
   port: 3306,
-  username: 'root',
-  password: 'Hoilamgi@134!',
+  username: 'duytuit',
+  password: 'Duytuit89!',
   database: 'chat_socket_pro',
   charset: "utf8mb4", // 设置chatset编码为utf8mb4
   autoLoadEntities: true,
@@ -31,16 +31,7 @@ const _opntion_pro:TypeOrmModuleOptions = {
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-        type: 'mysql',
-        port: 3306,
-        username: 'root',
-        password: 'Hoilamgi@134!',
-        database: 'chat_socket_pro',
-        charset: "utf8mb4", // 设置chatset编码为utf8mb4
-        autoLoadEntities: true,
-        synchronize: true
-    }),
+    TypeOrmModule.forRoot(process.env.NODE_ENV == 'dev' ? _opntion_dev : _opntion_pro),
     UserModule,
     ChatModule,
     FriendModule,
