@@ -22,7 +22,6 @@ const _opntion_pro:TypeOrmModuleOptions = {
   type: 'mysql',
   port: 3306,
   username: 'root',
-  password: 'Hoilamgi@134!',
   database: 'chat_socket_pro',
   charset: "utf8mb4", // 设置chatset编码为utf8mb4
   autoLoadEntities: true,
