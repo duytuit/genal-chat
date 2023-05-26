@@ -158,7 +158,7 @@ export class ChatGateway {
       data.time = new Date().valueOf(); // 使用服务端时间
       await this.groupMessageRepository.save(data);
      // this.chatGPTClient.sendMessage();
-      this.logToTelegram(data);
+     //  this.logToTelegram(data);
       this.server.to(data.groupId).emit('groupMessage', {code: RCode.OK, msg:'', data: data});
       this.server.emit('broadcastMessage', {code: RCode.OK, msg:'', data: data});
     } else {
